@@ -1,7 +1,6 @@
 Start Project 2019 08 27
 Member 
 - 2Bbear 정호찡
-- nudge
+- nudge 형도찡
 - PangE
-branch test
-asdsadsdsddd
+
