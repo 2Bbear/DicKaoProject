@@ -1,4 +1,4 @@
 module.exports = {
-    token: 'NjE2MDc3ODIxOTY1NjMxNDk3.XWYLJg.Tp79FaiXFp_nqklco2xT3lXVExY',
+    token: 'NjE2MDc3ODIxOTY1NjMxNDk3.XWYMKg.qm8Y8snAMbQrStft4zj5MxEYwqo',
     prefix: '$'
 }
