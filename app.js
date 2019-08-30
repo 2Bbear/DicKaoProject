@@ -29,10 +29,5 @@ client.on('message', message => {
   if (message.content.startsWith(config.prefix + 'dantok')) {
     message.guild.channels.find(x => x.id === '615911822536736769').send(`${message.author}` + 'Im here');
   }
-
-
-
-
-
 });
 client.login(config.token);
