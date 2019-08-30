@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const config = require('./TargetConfig');
 const client = new Discord.Client();
+var passport = require('passport');
+var KakaoStrategy = require('passport-kakao').Strategy;
 
 client.on('ready', () => {
   console.log('서비스 시작!');
