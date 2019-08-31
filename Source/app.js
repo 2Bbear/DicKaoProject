@@ -1,20 +1,12 @@
 const Discord = require('discord.js');
 const config = require('../TargetConfig');
 const client = new Discord.Client();
-const passport = require('passport');
-const KakaoStrategy = require('passport-kakao').Strategy;
+
+const dkaoWebServer = require('./expressSampleServer/dikaoWebServer');
+
+dkaoWebServer.Start();
 
 
-
-passport.use('login-kakao', new KakaoStrategy({
-  clientID : config.kakao.client_id,
-  callbackURL : config.kakao.callback_url_redirect // 카카오 개발자 사이트에서 지정한 리다이렉트 URL 
-},
-function(accessToken, refreshToken, profile, done) {
-  console.log('오 성공?');
-  return done(null, profile);
-}
-));
 
 client.on('ready', () => {
   console.log('서비스 시작!');
@@ -47,8 +39,6 @@ client.on('message', message => {
   //kakao 접속
   if(message.content.startsWith(config.prefix + 'loginKatalk'))
   {
-      passport.authenticate('login-kakao',{successRedirect:message.channel.send('katalk success'), failureRedirect: message.channel.send('katal fali')});
-
       message.channel.send('exppppp');
   }
 });
