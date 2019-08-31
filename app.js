@@ -5,6 +5,7 @@ const passport = require('passport');
 const KakaoStrategy = require('passport-kakao').Strategy;
 
 
+
 passport.use('login-kakao', new KakaoStrategy({
   clientID : config.kakao.client_id,
   callbackURL : config.kakao.callback_url_redirect // 카카오 개발자 사이트에서 지정한 리다이렉트 URL 
