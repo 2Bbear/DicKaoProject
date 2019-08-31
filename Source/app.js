@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('./TargetConfig');
+const config = require('../TargetConfig');
 const client = new Discord.Client();
 const passport = require('passport');
 const KakaoStrategy = require('passport-kakao').Strategy;
