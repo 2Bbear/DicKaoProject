@@ -1,11 +1,12 @@
-const Discord = require('discord.js');
+const  Discord = require('discord.js');
+const {RichEmbed} = require('discord.js');
 const config = require('./TargetConfig');
 const client = new Discord.Client();
 var passport = require('passport');
 var KakaoStrategy = require('passport-kakao').Strategy;
 
 client.on('ready', () => {
-  console.log('서비스 시작!');
+  console.log(`${client.user.tag}가 서비스 시작!`);
 });
 
 client.on('message', message => {
@@ -31,5 +32,16 @@ client.on('message', message => {
   if (message.content.startsWith(config.prefix + 'dantok')) {
     message.guild.channels.find(x => x.id === '615911822536736769').send(`${message.author}` + 'Im here');
   }
+
+  // 임베드 메세지 - 형식 메세지
+  if (message.content.startsWith(config.prefix + 'embed')) {
+    const embed = new RichEmbed()
+      .setTitle('너찌 : 연두색이 좋아')
+      .setColor(0xff000)
+      /*.setDescription('연두색이 좋아')*/
+    message.channel.send(embed);
+  }
+
+
 });
 client.login(config.token);
