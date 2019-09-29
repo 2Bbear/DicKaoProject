@@ -53,10 +53,10 @@ function WebServerStart()
     console.log("Express server has started on port 8080")
   })
 
-  app.get('/login-kakao', passport.authenticate("login-kakao",{
-    successRedirect: '/start-dikao',
-    failureRedirect: '/start-dikao'
-  }));
+  // app.get('/login-kakao', passport.authenticate("login-kakao",{
+  //   successRedirect: '/start-dikao',
+  //   failureRedirect: '/start-dikao'
+  // }));
 
   app.get('/start-dikao',function(req,res){
     console.log("Some One Call start-dikao function!")
