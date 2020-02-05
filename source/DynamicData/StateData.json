@@ -1,0 +1,22 @@
+{
+    "curState" : 3,
+    "datas":[
+        {
+            "name" : "sleeping",
+            "kor"  : "수면중"
+        },
+        {
+            "name" : "studing",
+            "kor"  : "공부중"
+        },
+        {
+            "name" : "gaming",
+            "kor"  : "게임중"
+        },
+        {
+            "name" : "working",
+            "kor"  : "작업중"
+        }
+    ]
+
+}
