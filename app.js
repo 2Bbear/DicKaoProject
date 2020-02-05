@@ -3,15 +3,35 @@ const config = require('./TargetConfig');
 //const POEAPI = require('./source/PathOfExileAPI');
 const client = new Discord.Client();
 
+
+
+//파일 시스템 모듈 사용
+var curStateDatas;
+
+
+var Initializing = function()
+{
+
+}
+
+
 client.on('ready', () => {
   console.log('서비스 시작!');
+  //초기화
+  Initializing();
+  
 });
 
-currentMyState='수면중'
+
+//주 컨텐츠 영역 ======================================================================================================
 client.on('message', message => {
   if (message.channel.type == 'dm') return //direct message
   if (message.content.startsWith(config.prefix))
   {
+    if(message.content.includes(config.prefix + 'ChangeState'))
+    {
+
+    }
     
   } 
   else
@@ -20,11 +40,18 @@ client.on('message', message => {
     //특정 멘션으로 요청할때 반응하기
     if(message.content.includes('<@!343732615074807809'))
     {
-      message.channel.send('TwoBbearX_X님은 현재 '+currentMyState+' 입니다');
+      var fs = require('fs');
+      var obj = JSON.parse(fs.readFileSync('./source/DynamicData/StateData.json', 'utf8'));
+      message.channel.send('TwoBbearX_X님은 현재 '+obj.datas[obj.curState].kor+' 입니다');
     }
     return
   }
   
+
+});
+client.login(config.token);
+
+/*
 
   //기본 핑퐁+응답시간
   if (message.content.startsWith(config.prefix + 'ping')) {
@@ -54,5 +81,4 @@ client.on('message', message => {
   if (message.content.startsWith(config.prefix + 'getPOEAPI')){
     message.guild.channels.find('');
   }
-});
-client.login(config.token);
+*/
