@@ -7,6 +7,7 @@ const client = new Discord.Client();
 
 //파일 시스템 모듈 사용
 var curStateDatas;
+var curStateDataIndex;
 
 
 var Initializing = function()
@@ -30,23 +31,38 @@ client.on('message', message => {
   {
     test = message.toString();
     //상태값 추가 커맨드
-    if(message.content.includes(config.prefix + 'addcs'))
+    if(message.content.includes(config.prefix + 'addst'))
     {
-
+      message.channel.send('상태값 추가 커맨드');
     }
     //상태값 지정 커맨드
+    if(message.content.includes(config.prefix + 'cst'))
+    {
+      message.channel.send('상태값 지정 커맨드');
+    }
     //상태값 삭제 커맨드
+    if(message.content.includes(config.prefix + 'delst'))
+    {
+      message.channel.send('상태값 삭제 커맨드');
+    }
     //상태값 전부 삭제 커맨드
+    if(message.content.includes(config.prefix + 'alldelst'))
+    {
+      message.channel.send('상태값 전부 삭제 커맨드');
+    }
     //상태값 출력 커맨드
+    if(message.content.includes(config.prefix + 'stlist'))
+    {
+      message.channel.send('상태값 출력 커맨드');
+    }
     
   } 
   else
   {
-    
-    //특정 멘션으로 요청할때 반응하기
+    //특정 유저를 멘션으로 요청할때 반응하기
     if(message.content.includes('<@!343732615074807809'))
     {
-      message.channel.send('TwoBbearX_X님은 현재 '+obj.datas[obj.curState].kor+' 입니다');
+      message.channel.send('TwoBbearX_X님은 현재 '+curStateDatas[curStateDataIndex]+' 입니다');
     }
     return
   }
