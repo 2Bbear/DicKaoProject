@@ -5,6 +5,7 @@ const client = new Discord.Client();
 
 
 
+
 //파일 시스템 모듈 사용
 var curStateDatas= new Array();
 var curStateDataIndex;
@@ -124,6 +125,72 @@ client.on('message', message => {
     {
       message.channel.send("현재 상태 값은 "+ curStateDatas[curStateDataIndex] + ' 입니다.');
     }
+
+    //전송한 메세지 콘솔에 띄우는 법
+    if(message.content.startsWith(config.prefix + 'tm1'))
+    {
+      message.channel.send("#test")
+      .then(message=>console.log(`sent message : ${message.content}`))
+      .catch(console.error);
+    }
+    //url 링크 파일 전송하는 법
+    if(message.content.startsWith(config.prefix + 'tm2'))
+    {
+      message.channel.send({
+        files: ['http://blogattach.naver.net/d045cc7f6d3734e8c72a437b48a8d7a8025aa2427e/20200203_137_blogfile/harne__1580667756631_QYEa3d_smi/%5BOhys-Raws%5D+ID+Invaded+-+06+%28BS11+1280x720+x264+AAC%29.smi?type=attachment']})
+        .then(console.log)
+        .catch(console.error);
+    }
+    //로컬 파일 전송하는 방법
+    if(message.content.startsWith(config.prefix + 'tm3'))
+    {
+      message.channel.send({
+        files: [{
+          attachment: './ReadMe.txt',
+          name: 'ReadMe.txt'
+        }]})
+        .then(console.log)
+        .catch(console.error);
+    }
+    //로컬 이미지를 임베디드해서 넣는 방법
+    if(message.content.startsWith(config.prefix + 'tm4'))
+    {
+      message.channel.send('This is an embed', {
+        embed: {
+          thumbnail: {
+               url: 'attachment://thumb-1920-775419.png' //이 부분은 해당 보내지는 임베드의 안에 있는 경로를 말한다. 
+                                                        // 모든 부분에서 이름이 알맞게 들어가야 임베드 안에 출력이 된다.
+            }
+         },
+         files: [{
+            attachment: './ResourceFiles/thumb-1920-775419.png',
+            name: 'thumb-1920-775419.png'
+         }]
+      })
+        .then(console.log)
+        .catch(console.error);
+    }
+
+    //채널의 이름 변경 방법 (관리자 권한을 요구함)
+    if(message.content.startsWith(config.prefix + 'tm5'))
+    {
+      message.channel.setName('not_general')
+      .then(newChannel => console.log(`Channel's new name is ${newChannel.name}`))
+      .catch(console.error);
+    }
+    //후방 금지 채널로 지정하는 방법
+    if(message.content.startsWith(config.prefix + 'tm6'))
+    {
+      message.channel.setNSFW(true,'there is no reason');
+    }
+    //카테고리 변경 방법
+    if(message.content.startsWith(config.prefix + 'tm7'))
+    {
+      //첫번째 매개변수에 카테고리의 id 값을 입력해야 합니다.
+      message.channel.setParent('674872026997063680', { lockPermissions: false })
+      .then(channel => console.log(`New parent of ${message.channel.name}: ${channel.name}`))
+      .catch(console.error);
+    }
   } 
   else
   {
@@ -132,13 +199,36 @@ client.on('message', message => {
     {
       message.channel.send('TwoBbearX_X님은 현재 '+curStateDatas[curStateDataIndex]+' 입니다');
     }
+
+    //아바타 예제
+    if(message.content === 'what is my avatar')
+    {
+      message.channel.send(message.author.displayAvatarURL);
+    }
+    //부착물 예제 1
+    // if (message.content === '!rip') 
+    // {
+    //   const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
+    //   // Send the attachment in the message channel
+    //   message.channel.send(attachment);
+    // }
+    
+    
+
     return
   }
+});
+//새로운 멤버가 들어왔을때
+client.on('guildMemberAdd',member=>{
+
+  const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+  if(!channel) return;
+  
+  channel.send(`이 서버에 오신걸 환영합니다., ${member}`);
 });
 client.login(config.token);
 
 /*
-
   //기본 핑퐁+응답시간
   if (message.content.startsWith(config.prefix + 'ping')) {
     message.reply('pong! `' + Math.floor(client.ping) + 'ms`');
