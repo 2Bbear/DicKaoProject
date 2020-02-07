@@ -127,14 +127,14 @@ client.on('message', message => {
     }
 
     //전송한 메세지 콘솔에 띄우는 법
-    if(message.content.startsWith(config.prefix + 'tm1'))
+    if(message.content===(config.prefix + 'tm1'))
     {
       message.channel.send("#test")
       .then(message=>console.log(`sent message : ${message.content}`))
       .catch(console.error);
     }
     //url 링크 파일 전송하는 법
-    if(message.content.startsWith(config.prefix + 'tm2'))
+    if(message.content===(config.prefix + 'tm2'))
     {
       message.channel.send({
         files: ['http://blogattach.naver.net/d045cc7f6d3734e8c72a437b48a8d7a8025aa2427e/20200203_137_blogfile/harne__1580667756631_QYEa3d_smi/%5BOhys-Raws%5D+ID+Invaded+-+06+%28BS11+1280x720+x264+AAC%29.smi?type=attachment']})
@@ -142,7 +142,7 @@ client.on('message', message => {
         .catch(console.error);
     }
     //로컬 파일 전송하는 방법
-    if(message.content.startsWith(config.prefix + 'tm3'))
+    if(message.content===(config.prefix + 'tm3'))
     {
       message.channel.send({
         files: [{
@@ -153,7 +153,7 @@ client.on('message', message => {
         .catch(console.error);
     }
     //로컬 이미지를 임베디드해서 넣는 방법
-    if(message.content.startsWith(config.prefix + 'tm4'))
+    if(message.content===(config.prefix + 'tm4'))
     {
       message.channel.send('This is an embed', {
         embed: {
@@ -172,24 +172,133 @@ client.on('message', message => {
     }
 
     //채널의 이름 변경 방법 (관리자 권한을 요구함)
-    if(message.content.startsWith(config.prefix + 'tm5'))
+    if(message.content===(config.prefix + 'tm5'))
     {
       message.channel.setName('not_general')
       .then(newChannel => console.log(`Channel's new name is ${newChannel.name}`))
       .catch(console.error);
     }
     //후방 금지 채널로 지정하는 방법
-    if(message.content.startsWith(config.prefix + 'tm6'))
+    if(message.content===(config.prefix + 'tm6'))
     {
       message.channel.setNSFW(true,'there is no reason');
     }
     //카테고리 변경 방법
-    if(message.content.startsWith(config.prefix + 'tm7'))
+    if(message.content===(config.prefix + 'tm7'))
     {
       //첫번째 매개변수에 카테고리의 id 값을 입력해야 합니다.
       message.channel.setParent('674872026997063680', { lockPermissions: false })
       .then(channel => console.log(`New parent of ${message.channel.name}: ${channel.name}`))
       .catch(console.error);
+    }
+    //메세지를 삭제하는 방법 , 현재부터 2주 전까지의 메세지를 일괄 삭제하는 방법
+    if(message.content===(config.prefix + 'tm8'))
+    {
+      //첫번째 매개변수에 카테고리의 id 값을 입력해야 합니다.
+      message.channel.bulkDelete(5) // 지우고 싶은 메세지 숫자를 입력해요
+      .then(messages => console.log(`Bulk deleted ${messages.size} messages`)) // 지운 갯수를 바로 반환 받을 수 있음
+      .catch(console.error);
+    }
+    //초대코드 만드는 방법
+    if(message.content===(config.prefix + 'tm9'))
+    {
+      message.channel.createInvite({
+        temporary :true, // 24동안 역할을 받지 못하면 바로 나가게 하는 초대권을 만들 것인지
+        maxAge : 50, // 몇 초 동안 초대 코드를 유지할 것인지. 0이면 무제한
+        maxUses : 8,//최대 초대 가능 인원
+      })
+      .then(invite => console.log(`Created an invite with a code of ${invite.code}`))
+      .catch(console.error);
+    }
+    //특정 단어를 감지하게 하는 방법
+    if(message.content===(config.prefix + 'tm10'))
+    {
+      //
+      const filter = m => m.content.includes('discord');
+      const collector = message.channel.createMessageCollector(filter, { time: 15000 });
+      collector.on('collect', m => console.log(`Collected ${m.content}`));
+      collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+    }
+    //해당 채널에 있는 사람들에게 역할이나 권한을 덮어씌우는 방법
+    if(message.content===(config.prefix + 'tm11'))
+    {
+      message.channel.createOverwrite(message.author, {
+        SEND_MESSAGES: false
+      })
+        .then(channel => console.log(channel.permissionOverwrites.get(message.author.id)))
+        .catch(console.error);
+    }
+    //웹훅 만드는 방법
+    if(message.content===(config.prefix + 'tm12'))
+    {
+      // Create a webhook for the current channel
+      message.channel.createWebhook('Snek', 
+        'https://i.imgur.com/mI8XcpG.jpg',
+        'Needed a cool new Webhook'
+      )
+        .then(console.log)
+        .catch(console.error)
+    }
+    //채널 삭제
+    if(message.content===(config.prefix + 'tm13'))
+    {
+      // Delete the channel
+      message.channel.delete('making room for new channels')
+      .then(console.log)
+      .catch(console.error);
+    }
+    //채널 수정
+    if(message.content===(config.prefix + 'tm14'))
+    {
+      // Edit a channel
+      message.channel.edit({
+         name: 'new-channel',
+        position:2,
+        topic:'dd',
+        nsfw:false,//후방 주의 설정
+        bitrate:124,//음성 채널의 음성 헤르츠
+        userLimit:4,//최대 인원
+        parentID:null,//이 채널의 부모가 될 채널
+        lockPermissions:true,//채널 권할을 부모꺼 받을껀지
+        //permissionOverwrites //권한 덮어씌우는데 어떻게 씌울지
+        //rateLimitPerUser // 
+
+        })
+      .then(console.log)
+      .catch(console.error);  
+    }
+    //채널 주제 설정
+    if(message.content===(config.prefix + 'tm15'))
+    {
+      // Set a new channel topic
+      message.channel.setTopic('needs more rate limiting')
+      .then(newChannel => console.log(`Channel's new topic is ${newChannel.topic}`))
+      .catch(console.error);
+    }
+
+    //~~님이 입력하고 있습니다..를 띄움..뭐하는 용도지 이거
+    if(message.content===(config.prefix + 'tm16'))
+    {
+      // Start typing in a channel with a typing count of five, or set it to five
+      message.channel.startTyping(5);
+
+      channel.stopTyping(true); //이거 해야 타이빙합니다~~ 하는게 끝남
+    }
+
+    //voice 채널에 봇을 초대하는 방법
+    if(message.content===(config.prefix + 'tm17'))
+    {
+      if(message.member.voiceChannel)
+      {
+        message.member.voiceChannel.join()
+          .then(RTCPeerConnection=>{
+            message.reply('Successfully joined!');
+          });
+      }
+      else{
+        message.reply('You must be in a voice channel to summon me!');
+      }
+      
     }
   } 
   else
