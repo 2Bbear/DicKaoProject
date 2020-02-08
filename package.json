@@ -1,0 +1,26 @@
+{
+  "name": "dickaoproject",
+  "version": "1.0.0",
+  "description": "Start Project 2019 08 27\r Member \r - 2Bbear 정호찡\r - nudge 형도찡\r - PangE",
+  "main": "TargetConfig.js",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "ffmpeg": "^0.0.4",
+    "opusscript": "0.0.7",
+    "passport-kakao": "^0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2Bbear/DicKaoProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2Bbear/DicKaoProject/issues"
+  },
+  "homepage": "https://github.com/2Bbear/DicKaoProject#readme"
+}

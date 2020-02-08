@@ -288,16 +288,24 @@ client.on('message', message => {
     //voice 채널에 봇을 초대하는 방법
     if(message.content===(config.prefix + 'tm17'))
     {
-      if(message.member.voiceChannel)
-      {
-        message.member.voiceChannel.join()
-          .then(RTCPeerConnection=>{
-            message.reply('Successfully joined!');
-          });
-      }
-      else{
-        message.reply('You must be in a voice channel to summon me!');
-      }
+      const channel = message.channel.id;
+      if (!channel) return console.error("The channel does not exist!");
+      channel.chal
+      .then(connection => {
+        // Yay, it worked!
+        console.log("Successfully connected.");
+      }).catch(e => {
+        // Oh no, it errored! Let's log it to console :)
+        console.error(e);
+      });
+      // if(message.member.voiceChannel)
+      // {
+      //   message.member.voiceChannel.join()
+      //     .then(connection => console.log('Connected!'));
+      // }
+      // else{
+      //   message.reply('You must be in a voice channel to summon me!');
+      // }
       
     }
   } 
@@ -321,9 +329,6 @@ client.on('message', message => {
     //   // Send the attachment in the message channel
     //   message.channel.send(attachment);
     // }
-    
-    
-
     return
   }
 });
