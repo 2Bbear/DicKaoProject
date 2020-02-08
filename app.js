@@ -45,7 +45,7 @@ async function execute(message, serverQueue) {
 			voiceChannel: voiceChannel,
 			connection: null,
 			songs: [],
-			volume: 5,
+			volume: 0.3,
 			playing: true,
 		};
 
@@ -102,6 +102,10 @@ function play(guild, song) {
 		});
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 }
+function slist(message, serverQueue)
+{
+
+}
 //기본 reply메세지==================================================================================
 client.on('ready', () => {
   console.log('서비스 시작!');
@@ -116,9 +120,6 @@ client.once('reconnecting', () => {
 client.once('disconnect', () => {
 	console.log('Disconnect!');
 });
-
-
-
 
 //주 컨텐츠 영역 ======================================================================================================
 client.on('message', message => {
