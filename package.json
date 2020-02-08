@@ -5,9 +5,11 @@
   "main": "TargetConfig.js",
   "dependencies": {
     "discord.js": "^11.5.1",
-    "ffmpeg": "^0.0.4",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^4.0.0",
     "opusscript": "0.0.7",
-    "passport-kakao": "^0.0.5"
+    "passport-kakao": "^0.0.5",
+    "ytdl-core": "^1.0.7"
   },
   "devDependencies": {},
   "scripts": {
